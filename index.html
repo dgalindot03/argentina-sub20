@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Argentina Academy Sub 20 - Campeones Estatales</title>
     
     <!-- Bootstrap 5 CSS -->
@@ -37,8 +37,15 @@
         body {
             font-family: 'Inter', sans-serif;
             color: var(--dark);
-            overflow-x: hidden;
             background-color: #fff;
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Solo prevenir scroll horizontal en el body, sin afectar elementos internos */
+        html {
+            overflow-x: hidden;
         }
 
         /* Navbar */
@@ -82,6 +89,7 @@
         .carousel-item img {
             object-fit: cover;
             height: 100%;
+            width: 100%;
             filter: brightness(0.7);
         }
 
@@ -432,6 +440,7 @@
             margin-right: 1rem;
             color: var(--primary);
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .mapa-container {
@@ -523,6 +532,7 @@
             border-color: var(--primary);
         }
 
+        /* Ajustes para móvil - solo tamaños, sin overflow */
         @media (max-width: 768px) {
             .carousel-caption h3 {
                 font-size: 1.8rem;
@@ -532,6 +542,59 @@
             }
             .section {
                 padding: 3rem 0;
+            }
+            .carousel-item {
+                height: 60vh;
+                min-height: 400px;
+            }
+            .carousel-caption {
+                bottom: 15%;
+                left: 5%;
+                right: 5%;
+                max-width: 90%;
+            }
+            .carousel-caption p {
+                font-size: 0.9rem;
+            }
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            .mapa-container {
+                height: 300px;
+            }
+            .patrocinador-item {
+                padding: 1rem;
+            }
+            .patrocinador-item img {
+                max-height: 60px;
+            }
+            .jugador-img {
+                height: 180px;
+            }
+            .galeria-item img {
+                height: 180px;
+            }
+            .transmision-card iframe {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            .navbar-brand img {
+                height: 35px;
+            }
+            .campeones-destacado {
+                padding: 2rem 0;
+            }
+            .campeones-destacado h2 {
+                font-size: 1.5rem;
+            }
+            .campeones-destacado .badge-gold {
+                font-size: 0.8rem;
+                padding: 0.5rem 1rem;
             }
         }
     </style>
@@ -809,7 +872,6 @@
                 <p>Nuestros 12 pequeños cracks de 5 y 6 años que hicieron historia</p>
             </div>
             <div class="row g-4">
-                <!-- Jugador 1 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="50">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -822,7 +884,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 2 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -835,7 +896,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 3 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="150">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -848,7 +908,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 4 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -861,7 +920,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 5 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="250">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -874,7 +932,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 6 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -887,7 +944,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 7 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="350">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -900,7 +956,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 8 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="400">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -913,7 +968,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 9 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="450">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -926,7 +980,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 10 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="500">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -939,7 +992,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 11 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="550">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -952,7 +1004,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Jugador 12 -->
                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="600">
                     <div class="jugador-card">
                         <div class="jugador-img">
@@ -979,8 +1030,8 @@
             </div>
             <div class="row g-3">
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto1.jpeg" data-type="image" data-title="Celebración del título">
-                        <img src="images/galeria/foto1.jpeg" alt="Celebración">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto1.jpg" data-type="image" data-title="Celebración del título">
+                        <img src="images/galeria/foto1.jpg" alt="Celebración">
                         <div class="galeria-overlay">
                             <h5>Celebración del título</h5>
                             <p>Final del campeonato estatal</p>
@@ -988,8 +1039,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto2.jpeg" data-type="image" data-title="Entrenamiento semanal">
-                        <img src="images/galeria/foto2.jpeg" alt="Entrenamiento">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto2.jpg" data-type="image" data-title="Entrenamiento semanal">
+                        <img src="images/galeria/foto2.jpg" alt="Entrenamiento">
                         <div class="galeria-overlay">
                             <h5>Entrenamiento semanal</h5>
                             <p>Trabajo técnico con los pequeños</p>
@@ -997,8 +1048,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto3.jpeg" data-type="image" data-title="Premiación">
-                        <img src="images/galeria/foto3.jpeg" alt="Premiación">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto3.jpg" data-type="image" data-title="Premiación">
+                        <img src="images/galeria/foto3.jpg" alt="Premiación">
                         <div class="galeria-overlay">
                             <h5>Premiación</h5>
                             <p>Entrega de medallas a los campeones</p>
@@ -1006,8 +1057,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto4.jpeg" data-type="image" data-title="Partido final">
-                        <img src="images/galeria/foto4.jpeg" alt="Partido final">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto4.jpg" data-type="image" data-title="Partido final">
+                        <img src="images/galeria/foto4.jpg" alt="Partido final">
                         <div class="galeria-overlay">
                             <h5>Partido final</h5>
                             <p>Acción del partido definitorio</p>
@@ -1262,7 +1313,6 @@
         });
 
         // Galería Modal
-        const galeriaItems = document.querySelectorAll('.galeria-item');
         const modalGaleria = document.getElementById('modalGaleria');
         
         modalGaleria.addEventListener('show.bs.modal', function(event) {
