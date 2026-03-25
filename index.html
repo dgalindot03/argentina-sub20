@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentina Academy Sub 20 - Campeones Estatales</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== VARIABLES Y ESTILOS GLOBALES ===== */
+        :root {
+            --primary: #1a2c3e;
+            --secondary: #e6b422;
+            --accent: #c0392b;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-600: #6c757d;
+            --success: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background-color: #fff;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #0a1a2a 0%, #1a2c3e 100%);
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar-brand img {
+            height: 45px;
+            margin-right: 10px;
+        }
+
+        .navbar-brand span {
+            color: var(--secondary);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary) !important;
+        }
+
+        /* Carrusel */
+        .carousel-item {
+            height: 85vh;
+            min-height: 500px;
+        }
+
+        .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            filter: brightness(0.7);
+        }
+
+        .carousel-caption {
+            bottom: 25%;
+            text-align: left;
+            left: 10%;
+            right: auto;
+            max-width: 600px;
+        }
+
+        .carousel-caption h3 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .carousel-caption p {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Sección de Campeones Destacado */
+        .campeones-destacado {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c4c6e 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .campeones-destacado::before {
+            content: "🏆";
+            font-size: 20rem;
+            position: absolute;
+            right: -50px;
+            bottom: -80px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .campeones-destacado h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .campeones-destacado .badge-gold {
+            background: var(--secondary);
+            color: var(--primary);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Sección de Torneos */
+        .torneo-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+
+        .torneo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .torneo-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .torneo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .torneo-card:hover .torneo-img img {
+            transform: scale(1.05);
+        }
+
+        .torneo-content {
+            padding: 1.5rem;
+        }
+
+        .torneo-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .torneo-content .trophy {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Sección de Noticias con botones */
+        .noticia-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: transform 0.3s;
+        }
+
+        .noticia-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .noticia-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .noticia-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .noticia-content {
+            padding: 1.25rem;
+        }
+
+        .noticia-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .btn-fuente {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-fuente:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Sección de Jugadores */
+        .jugador-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .jugador-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .jugador-img {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            background: var(--gray-200);
+        }
+
+        .jugador-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .jugador-card:hover .jugador-img img {
+            transform: scale(1.1);
+        }
+
+        .jugador-info {
+            padding: 1rem;
+        }
+
+        .jugador-info h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .jugador-info p {
+            color: var(--gray-600);
+            font-size: 0.85rem;
+        }
+
+        .numero-camiseta {
+            background: var(--secondary);
+            color: var(--primary);
+            font-weight: 800;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Sección Patrocinadores Destacada */
+        .patrocinadores-destacados {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            padding: 4rem 0;
+        }
+
+        .patrocinador-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .patrocinador-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .patrocinador-item img {
+            max-height: 80px;
+            width: auto;
+            max-width: 100%;
+        }
+
+        /* Galería */
+        .galeria-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .galeria-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 1rem;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .galeria-item:hover .galeria-overlay {
+            opacity: 1;
+        }
+
+        /* Transmisiones en vivo */
+        .transmision-card {
+            background: var(--dark);
+            border-radius: 16px;
+            overflow: hidden;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .transmision-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .transmision-card iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            pointer-events: none;
+        }
+
+        .transmision-info {
+            padding: 1rem;
+        }
+
+        /* Modal personalizado */
+        .modal-img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .modal-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
+
+        /* Contacto */
+        .contacto-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contacto-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .mapa-container {
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .mapa-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Botón flotante WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Utilidades */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 1rem auto;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .btn-outline-primary {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-caption h3 {
+                font-size: 1.8rem;
+            }
+            .campeones-destacado h2 {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/escudo.png" alt="Argentina Academy"> ARGENTINA <span>ACADEMY</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#equipo">El Equipo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#torneos">Torneos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#noticias">Noticias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#patrocinadores">Patrocinadores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#jugadores">Jugadores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#transmisiones">En Vivo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== SLIDER AUTOMÁTICO ==================== -->
+    <div id="carruselPrincipal" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carruselPrincipal" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#carruselPrincipal" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carruselPrincipal" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="images/carrusel/slide1.jpg" class="d-block w-100" alt="Equipo Sub 20 Campeón">
+                <div class="carousel-caption">
+                    <h3>Sub 20 - Campeones Estatales</h3>
+                    <p>¡Vamos por la Nacional! 2025 nos espera</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/carrusel/slide2.jpg" class="d-block w-100" alt="Celebración del Título">
+                <div class="carousel-caption">
+                    <h3>La alegría de ser campeones</h3>
+                    <p>Un equipo que trabaja con pasión y disciplina</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="images/carrusel/slide3.jpg" class="d-block w-100" alt="Entrenamiento">
+                <div class="carousel-caption">
+                    <h3>Formación integral</h3>
+                    <p>Valores, técnica y trabajo en equipo</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carruselPrincipal" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carruselPrincipal" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- ==================== SECCIÓN DESTACADA: CAMPEONES ESTATALES ==================== -->
+    <div class="campeones-destacado">
+        <div class="container">
+            <span class="badge-gold">🏆 CAMPEONES ESTATALES 2024 🏆</span>
+            <h2 data-aos="fade-up">¡Orgullo Sub 20!</h2>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">Tras ganar el campeonato estatal, nos preparamos para la gran final nacional.<br>¡Gracias a nuestros jugadores, cuerpo técnico y patrocinadores por hacerlo posible!</p>
+            <a href="#jugadores" class="btn btn-light mt-3" data-aos="fade-up" data-aos-delay="200">Conoce a nuestros campeones <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+
+    <!-- ==================== DESCRIPCIÓN DE LA ACADEMIA Y EQUIPO ==================== -->
+    <section class="section" id="equipo">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Academia Argentina Sub 20</h2>
+                <div class="section-divider"></div>
+                <p>Formando niños de 5 y 6 años con metodología profesional y valores argentinos</p>
+            </div>
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <img src="images/equipo/equipo-sub20.jpg" alt="Equipo Sub 20" class="img-fluid rounded-3 shadow">
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h3 style="font-size: 1.75rem; color: var(--primary); margin-bottom: 1.5rem;">La nueva generación de campeones</h3>
+                    <p class="mb-4">Nuestra categoría Sub 20 está compuesta por niños de 5 y 6 años que están dando sus primeros pasos en el fútbol con la pasión que caracteriza a nuestra academia. Bajo la dirección de un equipo técnico especializado en iniciación deportiva, trabajamos en el desarrollo de habilidades motoras, trabajo en equipo y valores como el respeto y la disciplina.</p>
+                    <p>En 2024 logramos el campeonato estatal, un hito histórico para nuestra categoría. Ahora nos preparamos para representar a nuestro estado en la competencia nacional.</p>
+                    <div class="mt-4">
+                        <a href="#jugadores" class="btn btn-primary">Conoce al plantel <i class="fas fa-users ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TORNEOS PARTICIPADOS Y GANADOS ==================== -->
+    <section class="section bg-light" id="torneos">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Torneos y Logros</h2>
+                <div class="section-divider"></div>
+                <p>Nuestro recorrido en el fútbol formativo</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="torneo-card">
+                        <div class="torneo-img">
+                            <img src="images/torneos/estatal.jpg" alt="Campeonato Estatal">
+                        </div>
+                        <div class="torneo-content">
+                            <div class="trophy"><i class="fas fa-trophy fa-2x" style="color: var(--secondary);"></i></div>
+                            <h3>Campeonato Estatal Sub 20</h3>
+                            <p class="text-muted">2024 - CAMPEONES</p>
+                            <p>Final disputada en el estadio municipal, venciendo 3-1 al equipo local.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="torneo-card">
+                        <div class="torneo-img">
+                            <img src="images/torneos/regional.jpg" alt="Torneo Regional">
+                        </div>
+                        <div class="torneo-content">
+                            <div class="trophy"><i class="fas fa-medal fa-2x" style="color: #c0c0c0;"></i></div>
+                            <h3>Torneo Regional de Fútbol Infantil</h3>
+                            <p class="text-muted">2024 - SUBCAMPEONES</p>
+                            <p>Excelente participación quedando en segundo lugar de la región.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="torneo-card">
+                        <div class="torneo-img">
+                            <img src="images/torneos/clausura.jpg" alt="Clausura">
+                        </div>
+                        <div class="torneo-content">
+                            <div class="trophy"><i class="fas fa-trophy fa-2x" style="color: var(--secondary);"></i></div>
+                            <h3>Torneo Clausura Municipal</h3>
+                            <p class="text-muted">2023 - CAMPEONES</p>
+                            <p>Primer título de la categoría en su historia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== NOTICIAS CON BOTONES ==================== -->
+    <section class="section" id="noticias">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Noticias</h2>
+                <div class="section-divider"></div>
+                <p>La prensa nos destaca: cobertura de nuestro campeonato estatal</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="noticia-card">
+                        <div class="noticia-img">
+                            <img src="images/noticias/noticia1.jpg" alt="Noticia Diario Deportivo">
+                        </div>
+                        <div class="noticia-content">
+                            <span class="badge bg-warning text-dark mb-2">MEDIO</span>
+                            <h4>Argentina Academy Sub 20 hace historia: ¡Campeones Estatales!</h4>
+                            <span class="fecha d-block mb-3"><i class="far fa-calendar me-2"></i>15 Noviembre, 2024</span>
+                            <p>Los pequeños de 5 y 6 años lograron el título tras una temporada impecable.</p>
+                            <a href="#" class="btn-fuente" target="_blank"><i class="fas fa-external-link-alt"></i> Ir a la fuente</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="noticia-card">
+                        <div class="noticia-img">
+                            <img src="images/noticias/noticia2.jpg" alt="Noticia Canal Local">
+                        </div>
+                        <div class="noticia-content">
+                            <span class="badge bg-danger text-white mb-2">TV</span>
+                            <h4>La alegría del fútbol infantil: reportaje a los campeones estatales</h4>
+                            <span class="fecha d-block mb-3"><i class="far fa-calendar me-2"></i>20 Noviembre, 2024</span>
+                            <p>Canal 9 entrevistó a los pequeños jugadores y al cuerpo técnico.</p>
+                            <a href="#" class="btn-fuente" target="_blank"><i class="fas fa-external-link-alt"></i> Ir a la fuente</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="noticia-card">
+                        <div class="noticia-img">
+                            <img src="images/noticias/noticia3.jpg" alt="Portal Web">
+                        </div>
+                        <div class="noticia-content">
+                            <span class="badge bg-primary text-white mb-2">WEB</span>
+                            <h4>Sub 20 de Argentina Academy clasifica a la Nacional</h4>
+                            <span class="fecha d-block mb-3"><i class="far fa-calendar me-2"></i>25 Noviembre, 2024</span>
+                            <p>El equipo se prepara para representar al estado en el torneo nacional.</p>
+                            <a href="#" class="btn-fuente" target="_blank"><i class="fas fa-external-link-alt"></i> Ir a la fuente</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PATROCINADORES DESTACADOS ==================== -->
+    <section class="patrocinadores-destacados" id="patrocinadores">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Nuestros Patrocinadores</h2>
+                <div class="section-divider"></div>
+                <p>Empresas que creen en nuestro proyecto. ¡Gracias por su apoyo!</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-2 col-md-3 col-6" data-aos="zoom-in" data-aos-delay="50">
+                    <a href="https://www.ejemplo1.com" target="_blank" class="text-decoration-none">
+                        <div class="patrocinador-item">
+                            <img src="images/patrocinadores/logo1.png" alt="Patrocinador 1">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <a href="https://www.facebook.com/ejemplo2" target="_blank" class="text-decoration-none">
+                        <div class="patrocinador-item">
+                            <img src="images/patrocinadores/logo2.png" alt="Patrocinador 2">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6" data-aos="zoom-in" data-aos-delay="150">
+                    <a href="https://www.ejemplo3.com" target="_blank" class="text-decoration-none">
+                        <div class="patrocinador-item">
+                            <img src="images/patrocinadores/logo3.png" alt="Patrocinador 3">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <a href="https://www.instagram.com/ejemplo4" target="_blank" class="text-decoration-none">
+                        <div class="patrocinador-item">
+                            <img src="images/patrocinadores/logo4.png" alt="Patrocinador 4">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6" data-aos="zoom-in" data-aos-delay="250">
+                    <a href="https://www.ejemplo5.com" target="_blank" class="text-decoration-none">
+                        <div class="patrocinador-item">
+                            <img src="images/patrocinadores/logo5.png" alt="Patrocinador 5">
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <a href="https://www.ejemplo6.com" target="_blank" class="text-decoration-none">
+                        <div class="patrocinador-item">
+                            <img src="images/patrocinadores/logo6.png" alt="Patrocinador 6">
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p class="lead">¿Quieres ser parte de nuestro crecimiento? <a href="#contacto" class="fw-bold">Contáctanos</a> y sé parte de nuestra familia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== JUGADORES DEL EQUIPO (12 JUGADORES) ==================== -->
+    <section class="section bg-light" id="jugadores">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Plantel Sub 20 - Campeones Estatales</h2>
+                <div class="section-divider"></div>
+                <p>Nuestros 12 pequeños cracks de 5 y 6 años que hicieron historia</p>
+            </div>
+            <div class="row g-4">
+                <!-- Jugador 1 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador1.jpg" alt="Mateo Fernández">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">10</div>
+                            <h4>Mateo Fernández</h4>
+                            <p>Delantero | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 2 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador2.jpg" alt="Lucas Gómez">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">7</div>
+                            <h4>Lucas Gómez</h4>
+                            <p>Volante | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 3 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador3.jpg" alt="Benjamín Rodríguez">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">1</div>
+                            <h4>Benjamín Rodríguez</h4>
+                            <p>Arquero | 5 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 4 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador4.jpg" alt="Santiago Martínez">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">5</div>
+                            <h4>Santiago Martínez</h4>
+                            <p>Defensor | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 5 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="250">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador5.jpg" alt="Tomás Álvarez">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">8</div>
+                            <h4>Tomás Álvarez</h4>
+                            <p>Volante | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 6 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador6.jpg" alt="Joaquín Díaz">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">9</div>
+                            <h4>Joaquín Díaz</h4>
+                            <p>Delantero | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 7 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="350">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador7.jpg" alt="Facundo López">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">4</div>
+                            <h4>Facundo López</h4>
+                            <p>Defensor | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 8 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador8.jpg" alt="Lautaro Pérez">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">6</div>
+                            <h4>Lautaro Pérez</h4>
+                            <p>Volante | 5 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 9 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="450">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador9.jpg" alt="Thiago Silva">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">11</div>
+                            <h4>Thiago Silva</h4>
+                            <p>Delantero | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 10 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador10.jpg" alt="Bruno Castro">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">2</div>
+                            <h4>Bruno Castro</h4>
+                            <p>Defensor | 5 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 11 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="550">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador11.jpg" alt="Valentino Acosta">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">3</div>
+                            <h4>Valentino Acosta</h4>
+                            <p>Defensor | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Jugador 12 -->
+                <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="jugador-card">
+                        <div class="jugador-img">
+                            <img src="images/jugadores/jugador12.jpg" alt="Ignacio Méndez">
+                        </div>
+                        <div class="jugador-info">
+                            <div class="numero-camiseta">12</div>
+                            <h4>Ignacio Méndez</h4>
+                            <p>Arquero | 6 años</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALERÍA DE IMÁGENES CON MODAL ==================== -->
+    <section class="section" id="galeria">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Galería</h2>
+                <div class="section-divider"></div>
+                <p>Momentos inolvidables de nuestra temporada</p>
+            </div>
+            <div class="row g-3">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto1.jpeg" data-type="image" data-title="Celebración del título">
+                        <img src="images/galeria/foto1.jpeg" alt="Celebración">
+                        <div class="galeria-overlay">
+                            <h5>Celebración del título</h5>
+                            <p>Final del campeonato estatal</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto2.jpeg" data-type="image" data-title="Entrenamiento semanal">
+                        <img src="images/galeria/foto2.jpeg" alt="Entrenamiento">
+                        <div class="galeria-overlay">
+                            <h5>Entrenamiento semanal</h5>
+                            <p>Trabajo técnico con los pequeños</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto3.jpeg" data-type="image" data-title="Premiación">
+                        <img src="images/galeria/foto3.jpeg" alt="Premiación">
+                        <div class="galeria-overlay">
+                            <h5>Premiación</h5>
+                            <p>Entrega de medallas a los campeones</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto4.jpeg" data-type="image" data-title="Partido final">
+                        <img src="images/galeria/foto4.jpeg" alt="Partido final">
+                        <div class="galeria-overlay">
+                            <h5>Partido final</h5>
+                            <p>Acción del partido definitorio</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="images/galeria/foto5.jpeg" data-type="image" data-title="Festejo en el vestuario">
+                        <img src="images/galeria/foto5.jpeg" alt="Festejo">
+                        <div class="galeria-overlay">
+                            <h5>Festejo en el vestuario</h5>
+                            <p>La alegría del campeonato</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="galeria-item" data-bs-toggle="modal" data-bs-target="#modalGaleria" data-media="videos/resumen-final.mp4" data-type="video" data-title="Resumen de la final">
+                        <img src="images/galeria/video-thumb.jpg" alt="Video resumen">
+                        <div class="galeria-overlay">
+                            <h5>📹 Resumen de la final</h5>
+                            <p>Video destacado del partido</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TRANSMISIONES EN VIVO CON MODAL ==================== -->
+    <section class="section bg-light" id="transmisiones">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>En Vivo</h2>
+                <div class="section-divider"></div>
+                <p>No te pierdas nuestros partidos y eventos</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="transmision-card" data-bs-toggle="modal" data-bs-target="#modalTransmision" data-media="https://www.youtube.com/embed/VIDEO_ID_AQUI?autoplay=1" data-title="🔴 EN VIVO: Próximo partido" data-type="live">
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI" title="Transmisión en vivo"></iframe>
+                        <div class="transmision-info">
+                            <h5>🔴 EN VIVO: Final del torneo regional</h5>
+                            <p class="mb-0"><i class="fas fa-calendar me-2"></i>Próximo partido: 15 de diciembre - 10:00 AM</p>
+                            <small class="text-muted">Click para ver en pantalla completa</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h4 class="mb-3">📺 Últimas transmisiones</h4>
+                    <div class="list-group">
+                        <div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalVideo" data-video="videos/transmisiones/final-estatal.mp4" data-title="Final Estatal - Argentina Academy vs Club Estrellas">
+                            <i class="fas fa-play-circle fa-2x" style="color: var(--secondary);"></i>
+                            <div>
+                                <h6 class="mb-0">Final Estatal - Argentina Academy vs Club Estrellas</h6>
+                                <small class="text-muted">28 Noviembre 2024 • 45 min</small>
+                            </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalVideo" data-video="videos/transmisiones/semifinal.mp4" data-title="Semifinal - Argentina Academy vs Deportivo Infantil">
+                            <i class="fas fa-play-circle fa-2x" style="color: var(--secondary);"></i>
+                            <div>
+                                <h6 class="mb-0">Semifinal - Argentina Academy vs Deportivo Infantil</h6>
+                                <small class="text-muted">20 Noviembre 2024 • 38 min</small>
+                            </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalVideo" data-video="videos/transmisiones/presentacion.mp4" data-title="Presentación del equipo campeón estatal">
+                            <i class="fas fa-play-circle fa-2x" style="color: var(--secondary);"></i>
+                            <div>
+                                <h6 class="mb-0">Presentación del equipo campeón estatal</h6>
+                                <small class="text-muted">10 Noviembre 2024 • 15 min</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACTO CON MAPA ==================== -->
+    <section class="section" id="contacto">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Contacto</h2>
+                <div class="section-divider"></div>
+                <p>¡Contáctanos para más información o para ser patrocinador!</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <div class="contacto-card">
+                        <div class="contacto-item">
+                            <div class="contacto-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h5>Ubicación</h5>
+                                <p class="mb-0">Av. Libertador 1234, Belgrano, CABA</p>
+                            </div>
+                        </div>
+                        <div class="contacto-item">
+                            <div class="contacto-icon"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <h5>Teléfono</h5>
+                                <p class="mb-0">+54 11 4567-8900</p>
+                            </div>
+                        </div>
+                        <div class="contacto-item">
+                            <div class="contacto-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h5>Email</h5>
+                                <p class="mb-0">info@argentinaacademy.com</p>
+                            </div>
+                        </div>
+                        <div class="social-links mt-4 d-flex gap-3">
+                            <a href="#" class="btn btn-dark rounded-circle"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="btn btn-dark rounded-circle"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="btn btn-dark rounded-circle"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="btn btn-dark rounded-circle"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <div class="contacto-card">
+                        <h4 class="mb-3">📍 Nuestra ubicación</h4>
+                        <div class="mapa-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.045678945678!2d-58.45678901234567!3d-34.5678901234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDM0JzA0LjQiUyA1OMKwMjcnMjQuNCJX!5e0!3m2!1ses!2sar!4v1234567890123" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="contacto-card">
+                        <h4 class="mb-3">📩 Envíanos un mensaje</h4>
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Nombre completo">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Correo electrónico">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" placeholder="Asunto">
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="form-control" rows="5" placeholder="Mensaje"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Enviar mensaje <i class="fas fa-paper-plane ms-2"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5>ARGENTINA ACADEMY</h5>
+                    <p>Formando jugadores con la pasión y el estilo del fútbol argentino. Categoría Sub 20 (5-6 años) Campeones Estatales 2024.</p>
+                </div>
+                <div class="col-lg-2">
+                    <h5>ENLACES</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="#equipo">El Equipo</a></li>
+                        <li><a href="#torneos">Torneos</a></li>
+                        <li><a href="#patrocinadores">Patrocinadores</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>CATEGORÍAS</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Sub 20 (5-6 años) - Campeones</a></li>
+                        <li><a href="#">Sub 18 (7-8 años)</a></li>
+                        <li><a href="#">Sub 16 (9-10 años)</a></li>
+                        <li><a href="#">Categorías Superiores</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>CONTACTO</h5>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone me-2"></i>+54 11 4567-8900</li>
+                        <li><i class="fas fa-envelope me-2"></i>info@argentinaacademy.com</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Av. Libertador 1234, CABA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Argentina Academy Sub 20. Todos los derechos reservados. | Campeones Estatales 2024</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón WhatsApp Flotante -->
+    <a href="https://wa.me/541145678900" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- MODAL PARA GALERÍA (Imágenes y Videos) -->
+    <div class="modal fade" id="modalGaleria" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-white" id="modalGaleriaTitle"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="modalGaleriaContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA TRANSMISIÓN EN VIVO -->
+    <div class="modal fade" id="modalTransmision" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-white" id="modalTransmisionTitle"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="modalTransmisionContent" class="ratio ratio-16x9"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA VIDEOS GRABADOS -->
+    <div class="modal fade" id="modalVideo" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-white" id="modalVideoTitle"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <video id="modalVideoPlayer" controls style="width: 100%;">
+                        <source src="" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Galería Modal
+        const galeriaItems = document.querySelectorAll('.galeria-item');
+        const modalGaleria = document.getElementById('modalGaleria');
+        
+        modalGaleria.addEventListener('show.bs.modal', function(event) {
+            const trigger = event.relatedTarget;
+            const media = trigger.getAttribute('data-media');
+            const type = trigger.getAttribute('data-type');
+            const title = trigger.getAttribute('data-title');
+            
+            const titleEl = document.getElementById('modalGaleriaTitle');
+            const contentEl = document.getElementById('modalGaleriaContent');
+            
+            titleEl.textContent = title;
+            
+            if (type === 'image') {
+                contentEl.innerHTML = `<img src="${media}" class="modal-img" alt="${title}">`;
+            } else if (type === 'video') {
+                contentEl.innerHTML = `<video controls style="width: 100%; max-height: 70vh;">
+                    <source src="${media}" type="video/mp4">
+                    Tu navegador no soporta el elemento de video.
+                </video>`;
+            }
+        });
+        
+        modalGaleria.addEventListener('hidden.bs.modal', function() {
+            document.getElementById('modalGaleriaContent').innerHTML = '';
+        });
+
+        // Transmisión en vivo Modal
+        const transmisionCard = document.querySelector('.transmision-card');
+        const modalTransmision = document.getElementById('modalTransmision');
+        
+        if (transmisionCard) {
+            modalTransmision.addEventListener('show.bs.modal', function(event) {
+                const trigger = event.relatedTarget;
+                const media = trigger.getAttribute('data-media');
+                const title = trigger.getAttribute('data-title');
+                
+                const titleEl = document.getElementById('modalTransmisionTitle');
+                const contentEl = document.getElementById('modalTransmisionContent');
+                
+                titleEl.textContent = title;
+                contentEl.innerHTML = `<iframe src="${media}" class="modal-video" allowfullscreen></iframe>`;
+            });
+            
+            modalTransmision.addEventListener('hidden.bs.modal', function() {
+                document.getElementById('modalTransmisionContent').innerHTML = '';
+            });
+        }
+
+        // Videos grabados Modal
+        const videoItems = document.querySelectorAll('[data-bs-target="#modalVideo"]');
+        const modalVideo = document.getElementById('modalVideo');
+        const videoPlayer = document.getElementById('modalVideoPlayer');
+        
+        videoItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const videoSrc = this.getAttribute('data-video');
+                const title = this.getAttribute('data-title');
+                document.getElementById('modalVideoTitle').textContent = title;
+                videoPlayer.querySelector('source').src = videoSrc;
+                videoPlayer.load();
+            });
+        });
+        
+        modalVideo.addEventListener('hidden.bs.modal', function() {
+            videoPlayer.pause();
+            videoPlayer.querySelector('source').src = '';
+            videoPlayer.load();
+        });
+    </script>
+</body>
+</html>
